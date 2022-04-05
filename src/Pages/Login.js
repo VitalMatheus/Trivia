@@ -5,9 +5,11 @@ class Login extends React.Component {
     return (
       <section>
         <label htmlFor="">
-          Nome: 
+          Nome:
           <input
-            type="text" />
+            type="text"
+            
+            />
         </label>
       </section>
     );
@@ -15,3 +17,4 @@ class Login extends React.Component {
 }
 
 export default Login;
+//push
