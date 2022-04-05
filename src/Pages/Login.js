@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchToken } from '../Redux/Actions';
 
 const MIN_VALUE_INPUT = 1;
 class Login extends React.Component {
@@ -17,6 +20,12 @@ class Login extends React.Component {
       [name]: value,
     });
   }
+
+  handleClick = () => {
+    const { findToken, history } = this.props;
+    findToken();
+    history.push('/game');
+  };
 
   render() {
     const { name, email } = this.state;
@@ -43,6 +52,7 @@ class Login extends React.Component {
           type="button"
           data-testid="btn-play"
           disabled={ name.length < MIN_VALUE_INPUT || email.length < MIN_VALUE_INPUT }
+          onClick={ this.handleClick }
         >
           Play
         </button>
@@ -51,4 +61,15 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  findToken: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => ({
+  findToken: () => dispatch(fetchToken()),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
