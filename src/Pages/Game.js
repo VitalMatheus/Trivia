@@ -42,13 +42,13 @@ class Game extends Component {
 
   // Recebe array de questões
   randomBtns = (asks) => {
-    // Questões erradas
+    // Questões erradas;
     const quest = asks.incorrect_answers;
-    // Todas as questões
+    // Todas as questões;
     const questes = [...quest, asks.correct_answer];
     const RANDOM = 0.5;
     const sorted = questes.sort(() => Math.random() - RANDOM);
-    // Salva questões corretas e incorretas no estado
+    // Salva questões corretas e incorretas no estado;
     this.setState({ answers: sorted,
       correctAnswer: asks.correct_answer,
       wrongAnswers: quest });
