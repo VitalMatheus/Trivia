@@ -7,8 +7,6 @@ class Header extends React.Component {
   render() {
     const { getName, getEmail, getScore, loading } = this.props;
     const imageGravatar = !loading && md5(getEmail).toString();
-    console.log(imageGravatar);
-    console.log(getName);
     return (
       <div>
         <img
