@@ -36,9 +36,10 @@ export const setGameSettings = (payload) => ({
   payload,
 });
 
-export const setScore = (score) => ({
+export const setScore = (score, assertion) => ({
   type: SET_SCORE,
   score,
+  assertion,
 });
 
 export const fetchToken = () => async (dispatch) => {

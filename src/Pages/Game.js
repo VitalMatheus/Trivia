@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
+import { fetchApi } from '../Services/fetchApi';
+import '../Styles/Game.css';
 import { setScore } from '../Redux/Actions';
 import { fetchApi } from '../Services/fetchApi';
 import '../Styles/Game.css';
@@ -43,9 +45,9 @@ class Game extends Component {
 
   // Recebe array de questões
   randomBtns = (asks) => {
-    // Questões erradas
+    // Questões erradas;
     const quest = asks.incorrect_answers;
-    // Todas as questões
+    // Todas as questões;
     const questes = [...quest, asks.correct_answer];
     const RANDOM = 0.5;
     const sorted = questes.sort(() => Math.random() - RANDOM);
@@ -106,19 +108,19 @@ class Game extends Component {
         const score = 10;
         let aux = 0;
         aux = score + timer * 1;
-        return dispatch(setScore(aux));
+        return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'medium') {
         const score = 10;
         let aux = 0;
         aux = score + timer * 2;
-        return dispatch(setScore(aux));
+        return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'hard') {
         const score = 10;
         let aux = 0;
         aux = score + timer * tres;
-        return dispatch(setScore(aux));
+        return dispatch(setScore(aux, 1));
       }
     }
   }

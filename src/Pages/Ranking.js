@@ -46,7 +46,7 @@ class Ranking extends React.Component {
 }
 
 Ranking.propTypes = {
-  history: PropTypes.arrayOf({
+  history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
