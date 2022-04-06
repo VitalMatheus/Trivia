@@ -36,12 +36,14 @@ class Game extends Component {
     const RANDOM = 0.5;
     const sorted = questes.sort(() => Math.random() - RANDOM);
     return (
-      sorted.map((ask, index) => (
+      sorted.map((ask) => (
         <button
           key={ ask }
           type="button"
           data-testid={
-            ask === asks.correct_answer ? 'correct-answer' : `wrong-answer-${index}`
+            ask === asks.correct_answer
+              ? 'correct-answer'
+              : `wrong-answer-${quest.indexOf(ask)}`
           }
         >
           { ask }
