@@ -9,7 +9,7 @@ class Ranking extends React.Component {
   }
 
   render() {
-    const ranking = getRanking();
+    const ranking = getRanking() || [];
     return (
       <section>
         <p data-testid="ranking-title">Ranking</p>
