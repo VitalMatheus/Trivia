@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import { fetchApi } from '../Services/fetchApi';
 import '../Styles/Game.css';
+import { setScore } from '../Redux/Actions';
 
 class Game extends Component {
   constructor() {
