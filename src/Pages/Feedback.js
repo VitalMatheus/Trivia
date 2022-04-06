@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { zeroScore } from '../Redux/Actions';
 import Header from '../Components/Header';
 
 class Feedback extends React.Component {
   btnPlayAgain = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    const aux = 0;
+    dispatch(zeroScore(aux));
     history.push('/');
   }
 
@@ -69,6 +72,7 @@ Feedback.propTypes = {
   }).isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);

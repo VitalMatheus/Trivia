@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import { fetchApi } from '../Services/fetchApi';
@@ -69,6 +70,7 @@ class Game extends Component {
       this.randomBtns(results[ind]);
     });
     if (index === MAX_LENGTH_RESULTS) {
+      this.saveRanking();
       history.push('/feedback');
     }
   }
@@ -123,6 +125,21 @@ class Game extends Component {
         return dispatch(setScore(aux));
       }
     }
+  }
+
+  saveRanking = () => {
+    let ranking = JSON.parse(localStorage.getItem('ranking') || '[]');
+    const { name, score, email } = this.props;
+    const hash = md5(email).toString();
+    const picture = `https://www.gravatar.com/avatar/${hash}`;
+    const playerRanking = {
+      name,
+      score,
+      picture,
+    };
+    ranking = [...ranking, playerRanking];
+    // Salva o obj alterado
+    localStorage.setItem('ranking', JSON.stringify(ranking));
   }
 
   render() {
@@ -191,6 +208,9 @@ Game.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   token: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
@@ -205,6 +225,9 @@ const mapStateToProps = (state) => ({
   token: state.token,
   loading: state.isLoading,
   gameSettings: state.gameSettings,
+  name: state.player.name,
+  score: state.player.score,
+  email: state.player.email,
 });
 
 export default connect(mapStateToProps)(Game);

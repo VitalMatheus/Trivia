@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getRanking } from '../Services/localStorage';
+// import { getRanking } from '../Services/localStorage';
 
 class Ranking extends React.Component {
   btnGoHome = () => {
@@ -8,19 +8,23 @@ class Ranking extends React.Component {
     history.push('/');
   }
 
+  sortedRanking = () => {
+    let ranking = JSON.parse(localStorage.getItem('ranking'));
+    ranking = ranking.sort((a, b) => b.score - a.score);
+    return ranking;
+  }
+
   render() {
-    const ranking = getRanking();
+    const ranking = this.sortedRanking();
     return (
       <section>
         <p data-testid="ranking-title">Ranking</p>
         {ranking.map(({ name, score, picture }, index) => (
-          <div key={ name }>
+          <div key={ index }>
             <img src={ picture } alt={ name } />
             <p data-testid={ `player-name-${index}` }>{ name }</p>
-            <p>
-              <span>Pontuação</span>
-              <span data-testid={ `player-score-${index}` }>{ score }</span>
-            </p>
+            <p><span>Pontuação</span></p>
+            <p><span data-testid={ `player-score-${index}` }>{ score }</span></p>
           </div>
         ))}
         <button
