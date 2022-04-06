@@ -1,0 +1,60 @@
+.login-sect {
+  align-items: center;
+  background-color: var(--blue);
+  border-radius: 20px;
+  box-shadow: 15px 15px 10px var(--gray2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 500px;
+  min-height: 50%;
+  width: 50%;
+}
+
+.login-sect h1 {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.login-sect input {
+  border: none;
+  border-radius: 40px;
+  font-size: 1.5rem;
+  height: 50px;
+  margin: 15px 0;
+  padding: 10px;
+  width: 80%;
+}
+
+.login-btn-sect {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.login-btn-sect button {
+  background-color: var(--light-gray);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px var(--gray2);
+  cursor: pointer;
+  font-size: 1.2rem;
+  min-width: 30px;
+  padding: 10px;
+}
+
+.login-btn-sect button:disabled {
+  background-color: var(--light-blue);
+  color: white;
+  cursor: not-allowed;
+}
+
+.login-btn-sect button:hover {
+  background-color: var(--lighter-blue);
+  color: white;
+}
+
+.settings-icon {
+  height: 100%;
+  width: 100%;
+}

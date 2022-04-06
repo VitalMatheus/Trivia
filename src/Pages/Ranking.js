@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { AiOutlineHome } from 'react-icons/ai';
 import { getRanking } from '../Services/localStorage';
+import '../Styles/Ranking.css';
 
 class Ranking extends React.Component {
   btnGoHome = () => {
@@ -11,25 +13,33 @@ class Ranking extends React.Component {
   render() {
     const ranking = getRanking() || [];
     return (
-      <section>
-        <p data-testid="ranking-title">Ranking</p>
-        {ranking.map(({ name, score, picture }, index) => (
-          <div key={ name }>
-            <img src={ picture } alt={ name } />
-            <p data-testid={ `player-name-${index}` }>{ name }</p>
-            <p>
-              <span>Pontuação</span>
-              <span data-testid={ `player-score-${index}` }>{ score }</span>
-            </p>
-          </div>
-        ))}
+      <section className="ranking-page">
+        <h1 data-testid="ranking-title" className="ranking-title">Ranking</h1>
         <button
+          className="ranking-btn"
           type="button"
           data-testid="btn-go-home"
           onClick={ this.btnGoHome }
         >
-          Home
+          <AiOutlineHome className="home-icon" />
         </button>
+        <section className="ranking-sect">
+          {ranking.map(({ name, score, picture }, index) => (
+            <div key={ name } className="ranking-card">
+              <img src={ picture } alt={ name } />
+              <p
+                data-testid={ `player-name-${index}` }
+                className="ranking-name"
+              >
+                { name }
+              </p>
+              <p>
+                <span data-testid={ `player-score-${index}` }>{ score }</span>
+                <span> pontos</span>
+              </p>
+            </div>
+          ))}
+        </section>
       </section>
     );
   }
