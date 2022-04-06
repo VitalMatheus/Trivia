@@ -19,7 +19,7 @@ class Feedback extends React.Component {
     const { score, assertions } = this.props;
     const MIN_ASSERT = 3;
     return (
-      <section>
+      <section className="feedback-page">
         <Header />
         <section className="feedback-sect">
           <section className="feed-sect">

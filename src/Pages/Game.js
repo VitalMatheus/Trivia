@@ -107,19 +107,19 @@ class Game extends Component {
         const score = 10;
         let aux = 0;
         aux = score + timer * 1;
-        return dispatch(setScore(aux));
+        return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'medium') {
         const score = 10;
         let aux = 0;
         aux = score + timer * 2;
-        return dispatch(setScore(aux));
+        return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'hard') {
         const score = 10;
         let aux = 0;
         aux = score + timer * tres;
-        return dispatch(setScore(aux));
+        return dispatch(setScore(aux, 1));
       }
     }
   }
