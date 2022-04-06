@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
+import { fetchApi } from '../Services/fetchApi';
 
 class Game extends Component {
   constructor() {
@@ -10,23 +11,31 @@ class Game extends Component {
     this.state = {
       results: [],
       index: 0,
+      timer: 30,
+      answers: [],
+      correctAnswer: '',
+      wrongAnswers: [],
+      answerSelected: false,
+      chosen: '',
     };
   }
 
   componentDidUpdate(prevProp) {
     const { loading } = this.props;
     if (!loading && prevProp.loading !== loading) {
-      this.fetchApi();
+      this.fetchQuestions();
     }
   }
 
-  fetchApi = async () => {
-    const { token } = this.props;
-
-    const responseAsk = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
-    const ask = await responseAsk.json();
+  fetchQuestions = async () => {
+    const { token, gameSettings } = this.props;
+    const ask = await fetchApi({ token, gameSettings });
     this.setState({
       results: ask.results,
+    }, () => {
+      const { results, index } = this.state;
+      this.randomBtns(results[index]);
+      this.setTimer();
     });
   }
 
@@ -35,21 +44,9 @@ class Game extends Component {
     const questes = [...quest, asks.correct_answer];
     const RANDOM = 0.5;
     const sorted = questes.sort(() => Math.random() - RANDOM);
-    return (
-      sorted.map((ask) => (
-        <button
-          key={ ask }
-          type="button"
-          data-testid={
-            ask === asks.correct_answer
-              ? 'correct-answer'
-              : `wrong-answer-${quest.indexOf(ask)}`
-          }
-        >
-          { ask }
-        </button>
-      ))
-    );
+    this.setState({ answers: sorted,
+      correctAnswer: asks.correct_answer,
+      wrongAnswers: quest });
   }
 
   incrementIndexResults = () => {
@@ -58,14 +55,43 @@ class Game extends Component {
     const { index } = this.state;
     this.setState({
       index: index < MAX_LENGTH_RESULTS ? index + 1 : MAX_LENGTH_RESULTS,
+      timer: 30,
+      answerSelected: false,
+    }, () => {
+      const { results, index: ind } = this.state;
+      clearInterval(this.timerId);
+      this.setTimer();
+      this.randomBtns(results[ind]);
     });
     if (index === MAX_LENGTH_RESULTS) {
       history.push('/feedback');
     }
   }
 
+  setTimer = () => {
+    const timeout = 1000;
+    this.timerId = setInterval(() => {
+      this.setState((prevSt) => ({
+        timer: prevSt.timer - 1,
+      }), () => {
+        const { timer } = this.state;
+        if (timer === 0) {
+          clearInterval(this.timerId);
+        }
+      });
+    }, timeout);
+  }
+
+  selectAnswer = (ask) => {
+    // const { correctAnswer, wrongAnswers } = this.state;
+    clearInterval(this.timerId);
+    this.setState({ answerSelected: true,
+      chosen: ask });
+  }
+
   render() {
-    const { results, index } = this.state;
+    const { results, index, timer, answers, correctAnswer,
+      wrongAnswers, answerSelected, chosen } = this.state;
     return (
       <>
         <Header />
@@ -83,21 +109,37 @@ class Game extends Component {
                     </article>
                   </div>
                   <div data-testid="answer-options">
-                    {
-                      this.randomBtns(results[index])
-                    }
+                    {answers.map((ask) => (
+                      <button
+                        key={ ask }
+                        type="button"
+                        disabled={ timer === 0 }
+                        className={ chosen ? 'correct' : 'wrong' }
+                        data-testid={
+                          ask === correctAnswer
+                            ? 'correct-answer'
+                            : `wrong-answer-${wrongAnswers.indexOf(ask)}`
+                        }
+                        onClick={ () => this.selectAnswer(ask) }
+                      >
+                        { ask }
+                      </button>
+                    ))}
                   </div>
                 </div>
               )
           }
           <div>
-            <button
-              type="button"
-              onClick={ this.incrementIndexResults }
-              data-testid="btn-next"
-            >
-              Próximo
-            </button>
+            <p>{timer}</p>
+            {answerSelected && (
+              <button
+                type="button"
+                onClick={ this.incrementIndexResults }
+                data-testid="btn-next"
+              >
+                Próximo
+              </button>
+            )}
           </div>
         </section>
       </>
@@ -111,11 +153,17 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  gameSettings: PropTypes.shape({
+    type: PropTypes.string,
+    category: PropTypes.string,
+    difficulty: PropTypes.string,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   token: state.token,
   loading: state.isLoading,
+  gameSettings: state.gameSettings,
 });
 
 export default connect(mapStateToProps)(Game);
