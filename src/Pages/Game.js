@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Header from '../Components/Header';
-import { fetchApi } from '../Services/fetchApi';
 import { setScore } from '../Redux/Actions';
+import { fetchApi } from '../Services/fetchApi';
 
 class Game extends Component {
   constructor() {
@@ -122,6 +122,16 @@ class Game extends Component {
     }
   }
 
+  toggleClass = (ask) => {
+    const { correctAnswer, answerSelected } = this.state;
+    if (ask === correctAnswer && answerSelected) {
+      return 'correct-answer';
+    }
+    if (ask !== correctAnswer && answerSelected) {
+      return 'wrong-answer';
+    }
+  }
+
   render() {
     const { results, index, timer, answers, correctAnswer,
       wrongAnswers, answerSelected } = this.state;
@@ -147,11 +157,7 @@ class Game extends Component {
                         key={ ask }
                         type="button"
                         disabled={ timer === 0 }
-                        className={
-                          ask === correctAnswer
-                            ? 'correct-answer'
-                            : 'wrong-answer'
-                        }
+                        className={ this.toggleClass(ask) }
                         data-testid={
                           ask === correctAnswer
                             ? 'correct-answer'
