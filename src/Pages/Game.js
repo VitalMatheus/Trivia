@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { setScore } from '../Redux/Actions';
 import { fetchApi } from '../Services/fetchApi';
+import '../Styles/Game.css';
 
 class Game extends Component {
   constructor() {
@@ -138,12 +139,13 @@ class Game extends Component {
     return (
       <>
         <Header />
-        <section>
+        <p className="timer">{timer}</p>
+        <section className="game-sect">
           {
             results.length > 0
               && (
-                <div>
-                  <div>
+                <div className="game-card">
+                  <div className="question-sect">
                     <h3 data-testid="question-category">{ results[index].category }</h3>
                     <article>
                       <p data-testid="question-text">
@@ -151,7 +153,7 @@ class Game extends Component {
                       </p>
                     </article>
                   </div>
-                  <div data-testid="answer-options">
+                  <div data-testid="answer-options" className="answers-sect">
                     {answers.map((ask) => (
                       <button
                         key={ ask }
@@ -172,10 +174,10 @@ class Game extends Component {
                 </div>
               )
           }
-          <div>
-            <p>{timer}</p>
+          <div className="next-btn-sect">
             {answerSelected && (
               <button
+                className="btn-next"
                 type="button"
                 onClick={ this.incrementIndexResults }
                 data-testid="btn-next"
