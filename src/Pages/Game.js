@@ -1,10 +1,10 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import md5 from 'crypto-js/md5';
-import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import { fetchApi } from '../Services/fetchApi';
 import { setScore } from '../Redux/Actions';
+import '../Styles/Game.css';
 
 class Game extends Component {
   constructor() {
@@ -42,9 +42,9 @@ class Game extends Component {
 
   // Recebe array de questões
   randomBtns = (asks) => {
-    // Questões erradas
+    // Questões erradas;
     const quest = asks.incorrect_answers;
-    // Todas as questões
+    // Todas as questões;
     const questes = [...quest, asks.correct_answer];
     const RANDOM = 0.5;
     const sorted = questes.sort(() => Math.random() - RANDOM);
@@ -117,18 +117,29 @@ class Game extends Component {
     }
   }
 
+  toggleClass = (ask) => {
+    const { correctAnswer, answerSelected } = this.state;
+    if (ask === correctAnswer && answerSelected) {
+      return 'correct-answer';
+    }
+    if (ask !== correctAnswer && answerSelected) {
+      return 'wrong-answer';
+    }
+  }
+
   render() {
     const { results, index, timer, answers, correctAnswer,
       wrongAnswers, answerSelected } = this.state;
     return (
       <>
         <Header />
-        <section>
+        <p className="timer">{timer}</p>
+        <section className="game-sect">
           {
             results.length > 0
               && (
-                <div>
-                  <div>
+                <div className="game-card">
+                  <div className="question-sect">
                     <h3 data-testid="question-category">{ results[index].category }</h3>
                     <article>
                       <p data-testid="question-text">
@@ -136,17 +147,13 @@ class Game extends Component {
                       </p>
                     </article>
                   </div>
-                  <div data-testid="answer-options">
+                  <div data-testid="answer-options" className="answers-sect">
                     {answers.map((ask) => (
                       <button
                         key={ ask }
                         type="button"
                         disabled={ timer === 0 }
-                        className={
-                          ask === correctAnswer
-                            ? 'correct-answer'
-                            : 'wrong-answer'
-                        }
+                        className={ this.toggleClass(ask) }
                         data-testid={
                           ask === correctAnswer
                             ? 'correct-answer'
@@ -161,10 +168,10 @@ class Game extends Component {
                 </div>
               )
           }
-          <div>
-            <p>{timer}</p>
+          <div className="next-btn-sect">
             {answerSelected && (
               <button
+                className="btn-next"
                 type="button"
                 onClick={ this.incrementIndexResults }
                 data-testid="btn-next"

@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { AiOutlineHome } from 'react-icons/ai';
 import { getRanking } from '../Services/localStorage';
+import '../Styles/Ranking.css';
 
 class Ranking extends React.Component {
   btnGoHome = () => {
@@ -29,12 +31,30 @@ class Ranking extends React.Component {
           </div>
         ))}
         <button
+          className="ranking-btn"
           type="button"
           data-testid="btn-go-home"
           onClick={ this.btnGoHome }
         >
-          Home
+          <AiOutlineHome className="home-icon" />
         </button>
+        <section className="ranking-sect">
+          {ranking.map(({ name, score, picture }, index) => (
+            <div key={ name } className="ranking-card">
+              <img src={ picture } alt={ name } />
+              <p
+                data-testid={ `player-name-${index}` }
+                className="ranking-name"
+              >
+                { name }
+              </p>
+              <p>
+                <span data-testid={ `player-score-${index}` }>{ score }</span>
+                <span> pontos</span>
+              </p>
+            </div>
+          ))}
+        </section>
       </section>
     );
   }
