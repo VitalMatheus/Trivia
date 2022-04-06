@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchToken } from '../Redux/Actions';
+import { fetchToken, getUserInfos } from '../Redux/Actions';
 
 const MIN_VALUE_INPUT = 1;
 class Login extends React.Component {
@@ -22,9 +22,12 @@ class Login extends React.Component {
   }
 
   handleClick = () => {
-    const { findToken, history } = this.props;
+    const { email, name } = this.state;
+    const { findToken, history, getUserInfo } = this.props;
+
     findToken();
     history.push('/game');
+    getUserInfo(email, name);
   };
 
   render() {
@@ -74,10 +77,12 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
+  getUserInfo: PropTypes.func,
 }.isRequired;
 
 const mapDispatchToProps = (dispatch) => ({
   findToken: () => dispatch(fetchToken()),
+  getUserInfo: (email, name) => dispatch(getUserInfos(email, name)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

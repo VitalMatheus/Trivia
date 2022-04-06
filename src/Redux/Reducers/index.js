@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import tokenReducer from './token';
 import loadingReducer from './loading';
+import tokenReducer from './token';
+import userInfosReducer from './userInfos';
 
 const rootReducer = combineReducers({
+  player: userInfosReducer,
   token: tokenReducer,
   isLoading: loadingReducer,
 });

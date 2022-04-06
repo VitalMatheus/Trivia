@@ -1,6 +1,8 @@
 export const GET_TOKEN = 'GET_TOKEN';
 export const IS_LOADING = 'IS_LOADING';
 export const NOT_LOADING = 'NOT_LOADING';
+export const GET_USER_INFOS = 'GET_USER_INFOS';
+export const GET_SCORE_INFOS = 'GET_SCORE_INFOS';
 
 const getToken = (token) => ({
   type: GET_TOKEN,
@@ -14,6 +16,18 @@ const isLoading = {
 const notLoading = {
   type: NOT_LOADING,
 };
+
+export const getUserInfos = (email, name) => ({
+  type: GET_USER_INFOS,
+  email,
+  name,
+});
+
+export const getScoreInfos = (assertions, score) => ({
+  type: GET_SCORE_INFOS,
+  assertions,
+  score,
+});
 
 export const fetchToken = () => async (dispatch) => {
   dispatch(isLoading);

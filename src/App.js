@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import logo from './trivia.png';
 import './App.css';
+import Game from './Pages/Game';
 import Login from './Pages/Login';
+import logo from './trivia.png';
 import Settings from './Pages/Settings';
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
         <img src={ logo } className="App-logo" alt="logo" />
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/game" component={ Login } />
+          <Route path="/game" component={ Game } />
           <Route path="/settings" component={ Settings } />
         </Switch>
       </header>
