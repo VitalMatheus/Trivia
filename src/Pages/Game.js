@@ -18,7 +18,6 @@ class Game extends Component {
       correctAnswer: '',
       wrongAnswers: [],
       answerSelected: false,
-      // chosen: '',
     };
   }
 
@@ -90,9 +89,7 @@ class Game extends Component {
 
   selectAnswer = (ask) => {
     clearInterval(this.timerId);
-    this.setState({ answerSelected: true,
-      // chosen: ask
-    });
+    this.setState({ answerSelected: true });
     this.saveScore(ask);
   }
 
@@ -104,20 +101,17 @@ class Game extends Component {
     if (ask === correctAnswer) {
       if (difficulty === 'easy') {
         const score = 10;
-        let aux = 0;
-        aux = score + timer * 1;
+        const aux = score + timer * 1;
         return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'medium') {
         const score = 10;
-        let aux = 0;
-        aux = score + timer * 2;
+        const aux = score + timer * 2;
         return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'hard') {
         const score = 10;
-        let aux = 0;
-        aux = score + timer * tres;
+        const aux = score + timer * tres;
         return dispatch(setScore(aux, 1));
       }
     }
@@ -201,7 +195,7 @@ Game.propTypes = {
   }).isRequired,
   gameSettings: PropTypes.shape({
     type: PropTypes.string,
-    category: PropTypes.string,
+    category: PropTypes.number,
     difficulty: PropTypes.string,
   }).isRequired,
 };

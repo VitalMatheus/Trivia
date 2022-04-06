@@ -1,10 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
+import { zeroScore } from '../Redux/Actions';
 import Header from '../Components/Header';
+import { addPlayer } from '../Services/localStorage';
 import '../Styles/Feedback.css';
 
 class Feedback extends React.Component {
+  componentDidMount() {
+    this.saveRanking();
+  }
+
+  saveRanking = () => {
+    const { name, score, email, dispatch } = this.props;
+    const hash = md5(email).toString();
+    const picture = `https://www.gravatar.com/avatar/${hash}`;
+    const playerRanking = {
+      name,
+      score,
+      picture,
+    };
+    addPlayer(playerRanking);
+    const aux = 0;
+    dispatch(zeroScore(aux));
+  }
+
   btnPlayAgain = () => {
     const { history } = this.props;
     history.push('/');
@@ -68,6 +89,8 @@ class Feedback extends React.Component {
 const mapStateToProps = (state) => ({
   score: state.player.score,
   assertions: state.player.assertions,
+  name: state.player.name,
+  email: state.player.gravatarEmail,
 });
 
 Feedback.propTypes = {
@@ -76,6 +99,9 @@ Feedback.propTypes = {
   }).isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);

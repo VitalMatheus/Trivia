@@ -5,6 +5,7 @@ export const GET_USER_INFOS = 'GET_USER_INFOS';
 export const GET_SCORE_INFOS = 'GET_SCORE_INFOS';
 export const SET_GAME_SETTINGS = 'SET_GAME_SETTINGS';
 export const SET_SCORE = 'SET_SCORE';
+export const ZERO_SCORE = 'ZERO_SCORE';
 
 const getToken = (token) => ({
   type: GET_TOKEN,
@@ -25,12 +26,6 @@ export const getUserInfos = (email, name) => ({
   name,
 });
 
-export const getScoreInfos = (assertions, score) => ({
-  type: GET_SCORE_INFOS,
-  assertions,
-  score,
-});
-
 export const setGameSettings = (payload) => ({
   type: SET_GAME_SETTINGS,
   payload,
@@ -40,6 +35,11 @@ export const setScore = (score, assertion) => ({
   type: SET_SCORE,
   score,
   assertion,
+});
+
+export const zeroScore = (score) => ({
+  type: ZERO_SCORE,
+  score,
 });
 
 export const fetchToken = () => async (dispatch) => {

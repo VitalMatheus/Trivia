@@ -1,4 +1,4 @@
-import { GET_SCORE_INFOS, GET_USER_INFOS, SET_SCORE } from '../Actions';
+import { GET_USER_INFOS, SET_SCORE, ZERO_SCORE } from '../Actions';
 
 const INITIAL_PLAYER = {
   name: '',
@@ -15,16 +15,15 @@ const userInfosReducer = (state = INITIAL_PLAYER, action) => {
       name: action.name,
       gravatarEmail: action.email,
     };
-  case GET_SCORE_INFOS:
-    return {
-      ...state,
-      assertions: action.assertions,
-      score: action.score,
-    };
   case SET_SCORE:
     return { ...state,
       score: state.score + action.score,
       assertions: state.assertions + action.assertion,
+    };
+  case ZERO_SCORE:
+    return { ...state,
+      assertions: 0,
+      score: 0,
     };
   default: return state;
   }

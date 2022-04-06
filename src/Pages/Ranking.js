@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import { AiOutlineHome } from 'react-icons/ai';
 import { getRanking } from '../Services/localStorage';
 import '../Styles/Ranking.css';
@@ -10,11 +11,25 @@ class Ranking extends React.Component {
     history.push('/');
   }
 
+  sortedRanking = () => {
+    let ranking = getRanking();
+    ranking = ranking.sort((a, b) => b.score - a.score);
+    return ranking;
+  }
+
   render() {
-    const ranking = getRanking() || [];
+    const ranking = this.sortedRanking();
     return (
-      <section className="ranking-page">
-        <h1 data-testid="ranking-title" className="ranking-title">Ranking</h1>
+      <section>
+        <p data-testid="ranking-title">Ranking</p>
+        {ranking.map(({ name, score, picture }, index) => (
+          <div key={ index }>
+            <img src={ picture } alt={ name } />
+            <p data-testid={ `player-name-${index}` }>{ name }</p>
+            <p><span>Pontuação</span></p>
+            <p><span data-testid={ `player-score-${index}` }>{ score }</span></p>
+          </div>
+        ))}
         <button
           className="ranking-btn"
           type="button"
@@ -51,4 +66,4 @@ Ranking.propTypes = {
   }).isRequired,
 };
 
-export default Ranking;
+export default connect()(Ranking);
