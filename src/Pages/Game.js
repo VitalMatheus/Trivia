@@ -6,6 +6,7 @@ import { fetchApi } from '../Services/fetchApi';
 import '../Styles/Game.css';
 import { setScore } from '../Redux/Actions';
 import { fetchApi } from '../Services/fetchApi';
+import '../Styles/Game.css';
 
 class Game extends Component {
   constructor() {

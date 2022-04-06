@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { FiSettings } from 'react-icons/fi';
 import { connect } from 'react-redux';
 import { FiSettings } from 'react-icons/fi';
 import { fetchToken, getUserInfos } from '../Redux/Actions';
