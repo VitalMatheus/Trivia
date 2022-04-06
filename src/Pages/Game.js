@@ -88,13 +88,10 @@ class Game extends Component {
   }
 
   selectAnswer = (ask) => {
-    const { correctAnswer } = this.state;
     clearInterval(this.timerId);
     this.setState({ answerSelected: true,
       // chosen: ask
     });
-    console.log(ask);
-    console.log(correctAnswer);
     this.saveScore(ask);
   }
 
