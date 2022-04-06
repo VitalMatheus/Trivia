@@ -20,16 +20,10 @@ class Ranking extends React.Component {
   render() {
     const ranking = this.sortedRanking();
     return (
-      <section>
-        <p data-testid="ranking-title">Ranking</p>
-        {ranking.map(({ name, score, picture }, index) => (
-          <div key={ index }>
-            <img src={ picture } alt={ name } />
-            <p data-testid={ `player-name-${index}` }>{ name }</p>
-            <p><span>Pontuação</span></p>
-            <p><span data-testid={ `player-score-${index}` }>{ score }</span></p>
-          </div>
-        ))}
+      <section className="ranking-page">
+        <p data-testid="ranking-title" className="ranking-title">
+          Ranking
+        </p>
         <button
           className="ranking-btn"
           type="button"
