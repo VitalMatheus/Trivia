@@ -1,0 +1,107 @@
+.game-sect {
+  align-content: space-between;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 50vh;
+  width: 90vw;
+}
+
+.game-card {
+  align-items: center;
+  display: flex;
+  font-size: 1.2rem;
+  height: 90%;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.question-sect {
+  background-color: var(--light-gray);
+  border-radius: 20px;
+  box-shadow: 0 0 15px var(--gray);
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: center;
+  max-width: 45%;
+  padding: 20px;
+}
+
+.question-sect h3 {
+  border-bottom: 1px solid black;
+  padding-bottom: 8px;
+}
+
+.question-sect article {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  justify-self: center;
+}
+
+.answers-sect {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 45%;
+}
+
+.answers-sect button {
+  background-color: var(--light-blue);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 8px var(--gray);
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin: 15px;
+  padding: 10px;
+}
+
+.answers-sect button:disabled {
+  background-color: var(--blue);
+  color: white;
+  cursor: not-allowed;
+}
+
+.answers-sect button:hover {
+  background-color: var(--lighter-blue);
+  color: white;
+}
+
+.next-btn-sect {
+  min-height: 80px;
+}
+
+.btn-next {
+  background-color: var(--light-blue);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 8px var(--gray);
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin: 15px;
+  padding: 10px;
+}
+
+.btn-next:hover {
+  background-color: var(--lighter-blue);
+  color: white;
+}
+
+.timer {
+  align-items: center;
+  background-color: var(--blue);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: 2rem;
+  height: 70px;
+  justify-content: center;
+  width: 70px;
+}

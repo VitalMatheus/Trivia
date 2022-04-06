@@ -1,0 +1,54 @@
+.feedback-sect {
+  border-radius: 15px;
+  box-shadow: 0 0 15px var(--gray2);
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  justify-content: space-between;
+  width: 50vw;
+}
+
+.feed-sect {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+  height: 70%;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+.feed-sect p {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.feed-sect p:first-child {
+  border-bottom: 1px solid var(--gray2);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.btn-sect {
+  align-items: center;
+  display: flex;
+  height: 20%;
+  justify-content: center;
+  margin: 15px auto;
+  width: 80%;
+}
+
+.btn-sect button {
+  background-color: var(--light-blue);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px var(--gray2);
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin: 10px;
+  padding: 10px;
+}
+
+.btn-sect button:hover {
+  background-color: var(--lighter-blue);
+}

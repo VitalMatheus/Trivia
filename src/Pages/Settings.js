@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setGameSettings } from '../Redux/Actions';
 import { fetchCategories } from '../Services/fetchApi';
+import { FiSave } from 'react-icons/fi';
+import '../Styles/Settings.css';
 
 class Settings extends React.Component {
   constructor() {
@@ -34,7 +36,7 @@ class Settings extends React.Component {
   render() {
     const { type, difficulty, category, categories } = this.state;
     return (
-      <section>
+      <section className="settings-sect">
         <h1 data-testid="settings-title">Settings</h1>
         <select name="category" value={ category } onChange={ this.handleChange }>
           {categories.map(({ id, name }) => (
@@ -56,7 +58,7 @@ class Settings extends React.Component {
           type="button"
           onClick={ this.sendSettings }
         >
-          Save settings
+          <FiSave className="save-icon" />
         </button>
       </section>
     );
