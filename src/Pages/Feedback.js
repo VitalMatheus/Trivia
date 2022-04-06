@@ -19,7 +19,7 @@ class Feedback extends React.Component {
     const { score, assertions } = this.props;
     const MIN_ASSERT = 3;
     return (
-      <>
+      <section>
         <Header />
         <section className="feedback-sect">
           <section className="feed-sect">
@@ -48,19 +48,19 @@ class Feedback extends React.Component {
               data-testid="btn-play-again"
               type="button"
               onClick={ this.btnPlayAgain }
-              >
+            >
               Play Again
             </button>
             <button
               data-testid="btn-ranking"
               type="button"
               onClick={ this.btnRanking }
-              >
+            >
               Ranking
             </button>
           </section>
+        </section>
       </section>
-      </>
     );
   }
 }

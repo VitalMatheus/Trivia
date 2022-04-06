@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { FiSave } from 'react-icons/fi';
 import { setGameSettings } from '../Redux/Actions';
 import { fetchCategories } from '../Services/fetchApi';
-import { FiSave } from 'react-icons/fi';
 import '../Styles/Settings.css';
 
 class Settings extends React.Component {

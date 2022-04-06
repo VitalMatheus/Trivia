@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { FiSettings } from 'react-icons/fi';
 import { fetchToken, getUserInfos } from '../Redux/Actions';
 import '../Styles/Login.css';
-import { FiSettings } from 'react-icons/fi';
 
 const MIN_VALUE_INPUT = 1;
 class Login extends React.Component {
@@ -37,7 +37,13 @@ class Login extends React.Component {
     const { name, email } = this.state;
     return (
       <section className="login-sect">
-        <h1>Let's play <em>Trivia!</em></h1>
+        <h1>
+          Wanna play
+          {' '}
+          <em>
+            Trivia?
+          </em>
+        </h1>
         <section>
           <input
             name="name"

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { AiOutlineHome } from 'react-icons/ai';
 import { getRanking } from '../Services/localStorage';
 import '../Styles/Ranking.css';
-import { AiOutlineHome } from 'react-icons/ai';
 
 class Ranking extends React.Component {
   btnGoHome = () => {
@@ -27,7 +27,12 @@ class Ranking extends React.Component {
           {ranking.map(({ name, score, picture }, index) => (
             <div key={ name } className="ranking-card">
               <img src={ picture } alt={ name } />
-              <p data-testid={ `player-name-${index}` } className="ranking-name">{ name }</p>
+              <p
+                data-testid={ `player-name-${index}` }
+                className="ranking-name"
+              >
+                { name }
+              </p>
               <p>
                 <span data-testid={ `player-score-${index}` }>{ score }</span>
                 <span> pontos</span>
