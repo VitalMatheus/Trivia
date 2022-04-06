@@ -10,15 +10,13 @@ import Settings from './Pages/Settings';
 export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Switch>
-          <Route exact path="/" component={ Login } />
-          <Route exact path="/feedback" component={ Feedback } />
-          <Route exact path="/ranking" component={ Ranking } />
-          <Route path="/game" component={ Game } />
-          <Route path="/settings" component={ Settings } />
-        </Switch>
-      </header>
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/feedback" component={ Feedback } />
+        <Route exact path="/ranking" component={ Ranking } />
+        <Route path="/game" component={ Game } />
+        <Route path="/settings" component={ Settings } />
+      </Switch>
     </div>
   );
 }

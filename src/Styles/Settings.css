@@ -1,0 +1,47 @@
+.settings-sect {
+  align-items: center;
+  background-color: var(--blue);
+  border-radius: 20px;
+  box-shadow: 15px 15px 10px var(--gray2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 50%;
+  width: 50%;
+}
+
+.settings-sect h1 {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.settings-sect select {
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  height: 50px;
+  padding: 10px;
+  width: 80%;
+}
+
+.settings-sect button {
+  background-color: var(--light-gray);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px var(--gray2);
+  cursor: pointer;
+  font-size: 1.2rem;
+  min-width: 50px;
+  padding: 10px;
+}
+
+.settings-sect button:hover {
+  background-color: var(--lighter-blue);
+  color: white;
+}
+
+.save-icon {
+  height: 100%;
+  width: auto;
+}
