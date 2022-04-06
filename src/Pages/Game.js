@@ -18,7 +18,6 @@ class Game extends Component {
       correctAnswer: '',
       wrongAnswers: [],
       answerSelected: false,
-      // chosen: '',
     };
   }
 
@@ -70,7 +69,6 @@ class Game extends Component {
       this.randomBtns(results[ind]);
     });
     if (index === MAX_LENGTH_RESULTS) {
-      this.saveRanking();
       history.push('/feedback');
     }
   }
@@ -90,13 +88,8 @@ class Game extends Component {
   }
 
   selectAnswer = (ask) => {
-    const { correctAnswer } = this.state;
     clearInterval(this.timerId);
-    this.setState({ answerSelected: true,
-      // chosen: ask
-    });
-    console.log(ask);
-    console.log(correctAnswer);
+    this.setState({ answerSelected: true });
     this.saveScore(ask);
   }
 
@@ -108,38 +101,20 @@ class Game extends Component {
     if (ask === correctAnswer) {
       if (difficulty === 'easy') {
         const score = 10;
-        let aux = 0;
-        aux = score + timer * 1;
-        return dispatch(setScore(aux));
+        const aux = score + timer * 1;
+        return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'medium') {
         const score = 10;
-        let aux = 0;
-        aux = score + timer * 2;
-        return dispatch(setScore(aux));
+        const aux = score + timer * 2;
+        return dispatch(setScore(aux, 1));
       }
       if (difficulty === 'hard') {
         const score = 10;
-        let aux = 0;
-        aux = score + timer * tres;
-        return dispatch(setScore(aux));
+        const aux = score + timer * tres;
+        return dispatch(setScore(aux, 1));
       }
     }
-  }
-
-  saveRanking = () => {
-    let ranking = JSON.parse(localStorage.getItem('ranking') || '[]');
-    const { name, score, email } = this.props;
-    const hash = md5(email).toString();
-    const picture = `https://www.gravatar.com/avatar/${hash}`;
-    const playerRanking = {
-      name,
-      score,
-      picture,
-    };
-    ranking = [...ranking, playerRanking];
-    // Salva o obj alterado
-    localStorage.setItem('ranking', JSON.stringify(ranking));
   }
 
   render() {
@@ -208,15 +183,12 @@ Game.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   token: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
   gameSettings: PropTypes.shape({
     type: PropTypes.string,
-    category: PropTypes.string,
+    category: PropTypes.number,
     difficulty: PropTypes.string,
   }).isRequired,
 };
@@ -225,9 +197,6 @@ const mapStateToProps = (state) => ({
   token: state.token,
   loading: state.isLoading,
   gameSettings: state.gameSettings,
-  name: state.player.name,
-  score: state.player.score,
-  email: state.player.email,
 });
 
 export default connect(mapStateToProps)(Game);

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import { getRanking } from '../Services/localStorage';
+import { connect } from 'react-redux';
+import { getRanking } from '../Services/localStorage';
 
 class Ranking extends React.Component {
   btnGoHome = () => {
@@ -9,7 +10,7 @@ class Ranking extends React.Component {
   }
 
   sortedRanking = () => {
-    let ranking = JSON.parse(localStorage.getItem('ranking'));
+    let ranking = getRanking();
     ranking = ranking.sort((a, b) => b.score - a.score);
     return ranking;
   }
@@ -40,9 +41,9 @@ class Ranking extends React.Component {
 }
 
 Ranking.propTypes = {
-  history: PropTypes.arrayOf({
+  history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
-export default Ranking;
+export default connect()(Ranking);

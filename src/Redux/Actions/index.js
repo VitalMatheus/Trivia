@@ -26,20 +26,15 @@ export const getUserInfos = (email, name) => ({
   name,
 });
 
-export const getScoreInfos = (assertions, score) => ({
-  type: GET_SCORE_INFOS,
-  assertions,
-  score,
-});
-
 export const setGameSettings = (payload) => ({
   type: SET_GAME_SETTINGS,
   payload,
 });
 
-export const setScore = (score) => ({
+export const setScore = (score, assertion) => ({
   type: SET_SCORE,
   score,
+  assertion,
 });
 
 export const zeroScore = (score) => ({
