@@ -8,10 +8,6 @@ import { addPlayer } from '../Services/localStorage';
 import '../Styles/Feedback.css';
 
 class Feedback extends React.Component {
-  componentDidMount() {
-    this.saveRanking();
-  }
-
   saveRanking = () => {
     const { name, score, email, dispatch } = this.props;
     const hash = md5(email).toString();
@@ -28,11 +24,13 @@ class Feedback extends React.Component {
 
   btnPlayAgain = () => {
     const { history } = this.props;
+    this.saveRanking();
     history.push('/');
   }
 
   btnRanking = () => {
     const { history } = this.props;
+    this.saveRanking();
     history.push('/ranking');
   }
 
