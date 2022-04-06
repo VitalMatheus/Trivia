@@ -24,7 +24,7 @@ const userInfosReducer = (state = INITIAL_PLAYER, action) => {
   case SET_SCORE:
     return { ...state,
       score: state.score + action.score,
-      assertions: state.assertions + 1,
+      assertions: state.assertions + action.assertion,
     };
   default: return state;
   }
