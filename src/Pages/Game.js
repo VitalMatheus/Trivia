@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { fetchApi } from '../Services/fetchApi';
-import '../Styles/Game.css';
 import { setScore } from '../Redux/Actions';
-import { fetchApi } from '../Services/fetchApi';
 import '../Styles/Game.css';
 
 class Game extends Component {
