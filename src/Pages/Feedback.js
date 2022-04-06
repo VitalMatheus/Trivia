@@ -27,7 +27,6 @@ class Feedback extends React.Component {
 
   btnPlayAgain = () => {
     const { history } = this.props;
-    
     history.push('/');
   }
 
@@ -94,6 +93,8 @@ Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);

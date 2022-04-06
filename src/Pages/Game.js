@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import { fetchApi } from '../Services/fetchApi';
