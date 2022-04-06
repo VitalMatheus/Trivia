@@ -54,10 +54,14 @@ class Game extends Component {
 
   incrementIndexResults = () => {
     const MAX_LENGTH_RESULTS = 4;
+    const { history } = this.props;
     const { index } = this.state;
     this.setState({
       index: index < MAX_LENGTH_RESULTS ? index + 1 : MAX_LENGTH_RESULTS,
     });
+    if(index === MAX_LENGTH_RESULTS) {
+      history.push('/feedback');
+    }
   }
 
   render() {
@@ -87,7 +91,11 @@ class Game extends Component {
               )
           }
           <div>
-            <button type="button" onClick={ () => { this.incrementIndexResults(); } }>
+            <button
+              type="button"
+              onClick={ this.incrementIndexResults }
+              data-testid="btn-next"
+            >
               Próximo
             </button>
           </div>

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import Header from '../Components/Header';
 
 class Feedback extends React.Component {
   btnPlayAgain = () => {
@@ -13,51 +15,58 @@ class Feedback extends React.Component {
   }
 
   render() {
+    const { score, assertions } = this.props;
+    console.log(assertions);
     return (
       <>
-        <div>
-          <img src="/" alt="" data-testid="header-profile-picture" />
-          <p data-testid="header-player-name">
-            {/* { name } */}
-          </p>
-          <span data-testid="header-score">
-            {/* {score} */}
-          </span>
-        </div>
+        <Header />
         <section>
           <p data-testid="feedback-text">
-            {/* {score < 3 ? 'Could be better...' : 'Well Done!'} */}
+            {assertions < 3 ? 'Could be better...' : 'Well Done!'}
           </p>
-          <span data-testid="feedback-total-score">
-            {/* { localStorage chave score }  */}
-          </span>
-          <span data-testid="feedback-total-question">
-            {/* { localSorage chave assertions } */}
-          </span>
-          <button
-            data-testid="btn-play-again"
-            type="button"
-            onClick={ this.btnPlayAgain }
-          >
-            Play Again
-          </button>
-          <button
-            data-testid="btn-ranking"
-            type="button"
-            onClick={ this.btnRanking }
-          >
-            Ranking
-          </button>
+          <p>
+            Pontuação:
+            {' '}
+            <span data-testid="feedback-total-score">
+              { score } 
+            </span>
+          </p>
+          <p>
+            Número de acertos:
+            {' '}
+            <span data-testid="feedback-total-question">
+              { assertions }
+            </span>
+          </p>
         </section>
+        <button
+          data-testid="btn-play-again"
+          type="button"
+          onClick={ this.btnPlayAgain }
+        >
+          Play Again
+        </button>
+        <button
+          data-testid="btn-ranking"
+          type="button"
+          onClick={ this.btnRanking }
+        >
+          Ranking
+        </button>
       </>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  score: state.player.score,
+  assertions: state.player.assertions,
+});
+
 Feedback.propTypes = {
-  history: PropTypes.arrayOf({
+  history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
-export default Feedback;
+export default connect(mapStateToProps)(Feedback);

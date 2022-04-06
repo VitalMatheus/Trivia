@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getRanking } from '../Services/localStorage';
 
 class Ranking extends React.Component {
   btnGoHome = () => {
@@ -8,16 +9,20 @@ class Ranking extends React.Component {
   }
 
   render() {
-    const index = 0; // só pro lint não reclamar
+    const ranking = getRanking();
     return (
       <section>
         <p data-testid="ranking-title">Ranking</p>
-        <div>
-          <img src="/" alt="Aqui fica a imagem do Gravatar" />
-          <p data-testid={ `player-name-${index}` }>Nome do jogador</p>
-          <span>Pontuação</span>
-          <span data-testid={ `player-score-${index}` }> Valor da pontuação</span>
-        </div>
+        {ranking.map(({ name, score, picture }, index) => (
+          <div>
+            <img src={ picture } alt={ name } />
+            <p data-testid={ `player-name-${index}` }>{ name }</p>
+            <p>
+              <span>Pontuação</span>
+              <span data-testid={ `player-score-${index}` }>{ score }</span>
+            </p>
+          </div>
+        ))}
         <button
           type="button"
           data-testid="btn-go-home"
