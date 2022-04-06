@@ -52,7 +52,6 @@
 
 .answers-sect button {
   background-color: var(--light-blue);
-  border: none;
   border-radius: 5px;
   box-shadow: 0 0 8px var(--gray);
   color: white;
