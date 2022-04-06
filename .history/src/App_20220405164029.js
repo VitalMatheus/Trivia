@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Feedback from './Pages/Feedback';
 import Login from './Pages/Login';
-import Ranking from './Pages/Ranking';
 import logo from './trivia.png';
 
 export default function App() {
@@ -14,7 +13,6 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route exact path="/feedback" component={ Feedback } />
-          <Route exact path="/ranking" component={ Ranking } />
         </Switch>
       </header>
     </div>
