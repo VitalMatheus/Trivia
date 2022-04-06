@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { FiSettings } from 'react-icons/fi';
 import { fetchToken, getUserInfos } from '../Redux/Actions';
+import '../Styles/Login.css';
 
 const MIN_VALUE_INPUT = 1;
 class Login extends React.Component {
@@ -34,39 +36,50 @@ class Login extends React.Component {
     const { history } = this.props;
     const { name, email } = this.state;
     return (
-      <section>
-        <input
-          name="name"
-          data-testid="input-player-name"
-          type="text"
-          id="inputName"
-          placeholder="Digite seu nome"
-          value={ name }
-          onChange={ this.handleChange }
-        />
-        <input
-          type="email"
-          name="email"
-          data-testid="input-gravatar-email"
-          placeholder="Digite seu email"
-          value={ email }
-          onChange={ this.handleChange }
-        />
-        <button
-          type="button"
-          data-testid="btn-play"
-          disabled={ name.length < MIN_VALUE_INPUT || email.length < MIN_VALUE_INPUT }
-          onClick={ this.handleClick }
-        >
-          Play
-        </button>
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ () => history.push('/settings') }
-        >
-          Settings
-        </button>
+      <section className="login-sect">
+        <h1>
+          Wanna play
+          {' '}
+          <em>
+            Trivia?
+          </em>
+        </h1>
+        <section>
+          <input
+            name="name"
+            data-testid="input-player-name"
+            type="text"
+            id="inputName"
+            placeholder="Digite seu nome"
+            value={ name }
+            onChange={ this.handleChange }
+          />
+          <input
+            type="email"
+            name="email"
+            data-testid="input-gravatar-email"
+            placeholder="Digite seu email"
+            value={ email }
+            onChange={ this.handleChange }
+          />
+        </section>
+        <section className="login-btn-sect">
+          <button
+            type="button"
+            data-testid="btn-play"
+            disabled={ name.length < MIN_VALUE_INPUT || email.length < MIN_VALUE_INPUT }
+            onClick={ this.handleClick }
+          >
+            Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => history.push('/settings') }
+          >
+            <FiSettings className="settings-icon" />
+          </button>
+        </section>
       </section>
     );
   }
