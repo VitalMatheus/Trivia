@@ -59,7 +59,7 @@ class Game extends Component {
     this.setState({
       index: index < MAX_LENGTH_RESULTS ? index + 1 : MAX_LENGTH_RESULTS,
     });
-    if(index === MAX_LENGTH_RESULTS) {
+    if (index === MAX_LENGTH_RESULTS) {
       history.push('/feedback');
     }
   }
@@ -108,6 +108,9 @@ class Game extends Component {
 Game.propTypes = {
   loading: PropTypes.bool.isRequired,
   token: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({

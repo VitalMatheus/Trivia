@@ -16,19 +16,19 @@ class Feedback extends React.Component {
 
   render() {
     const { score, assertions } = this.props;
-    console.log(assertions);
+    const MIN_ASSERT = 3;
     return (
       <>
         <Header />
         <section>
           <p data-testid="feedback-text">
-            {assertions < 3 ? 'Could be better...' : 'Well Done!'}
+            {assertions < MIN_ASSERT ? 'Could be better...' : 'Well Done!'}
           </p>
           <p>
             Pontuação:
             {' '}
             <span data-testid="feedback-total-score">
-              { score } 
+              { score }
             </span>
           </p>
           <p>
@@ -67,6 +67,8 @@ Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
