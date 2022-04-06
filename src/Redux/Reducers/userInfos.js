@@ -1,4 +1,4 @@
-import { GET_SCORE_INFOS, GET_USER_INFOS } from '../Actions';
+import { GET_SCORE_INFOS, GET_USER_INFOS, SET_SCORE } from '../Actions';
 
 const INITIAL_PLAYER = {
   name: '',
@@ -20,6 +20,11 @@ const userInfosReducer = (state = INITIAL_PLAYER, action) => {
       ...state,
       assertions: action.assertions,
       score: action.score,
+    };
+  case SET_SCORE:
+    return { ...state,
+      score: state.score + action.score,
+      assertions: state.assertions + 1,
     };
   default: return state;
   }

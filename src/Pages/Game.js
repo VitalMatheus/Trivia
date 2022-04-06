@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import { fetchApi } from '../Services/fetchApi';
+import { setScore } from '../Redux/Actions';
 
 class Game extends Component {
   constructor() {
@@ -16,7 +17,7 @@ class Game extends Component {
       correctAnswer: '',
       wrongAnswers: [],
       answerSelected: false,
-      chosen: '',
+      // chosen: '',
     };
   }
 
@@ -39,11 +40,15 @@ class Game extends Component {
     });
   }
 
+  // Recebe array de questões
   randomBtns = (asks) => {
+    // Questões erradas
     const quest = asks.incorrect_answers;
+    // Todas as questões
     const questes = [...quest, asks.correct_answer];
     const RANDOM = 0.5;
     const sorted = questes.sort(() => Math.random() - RANDOM);
+    // Salva questões corretas e incorretas no estado
     this.setState({ answers: sorted,
       correctAnswer: asks.correct_answer,
       wrongAnswers: quest });
@@ -83,15 +88,43 @@ class Game extends Component {
   }
 
   selectAnswer = (ask) => {
-    // const { correctAnswer, wrongAnswers } = this.state;
     clearInterval(this.timerId);
     this.setState({ answerSelected: true,
-      chosen: ask });
+      // chosen: ask
+    });
+    this.saveScore(ask);
+  }
+
+  saveScore = (ask) => {
+    const { correctAnswer, results, index, timer } = this.state;
+    const tres = 3;
+    const { dispatch } = this.props;
+    const { difficulty } = results[index];
+    if (ask === correctAnswer) {
+      if (difficulty === 'easy') {
+        const score = 10;
+        let aux = 0;
+        aux = score + timer * 1;
+        return dispatch(setScore(aux));
+      }
+      if (difficulty === 'medium') {
+        const score = 10;
+        let aux = 0;
+        aux = score + timer * 2;
+        return dispatch(setScore(aux));
+      }
+      if (difficulty === 'hard') {
+        const score = 10;
+        let aux = 0;
+        aux = score + timer * tres;
+        return dispatch(setScore(aux));
+      }
+    }
   }
 
   render() {
     const { results, index, timer, answers, correctAnswer,
-      wrongAnswers, answerSelected, chosen } = this.state;
+      wrongAnswers, answerSelected } = this.state;
     return (
       <>
         <Header />
@@ -114,7 +147,11 @@ class Game extends Component {
                         key={ ask }
                         type="button"
                         disabled={ timer === 0 }
-                        className={ chosen ? 'correct' : 'wrong' }
+                        className={
+                          ask === correctAnswer
+                            ? 'correct-answer'
+                            : 'wrong-answer'
+                        }
                         data-testid={
                           ask === correctAnswer
                             ? 'correct-answer'
@@ -148,6 +185,7 @@ class Game extends Component {
 }
 
 Game.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   token: PropTypes.string.isRequired,
   history: PropTypes.shape({
